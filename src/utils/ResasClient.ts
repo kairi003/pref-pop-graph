@@ -10,7 +10,7 @@ const client = axios.create({
 });
 
 const getPrefectures = async () => {
-  const response = await axios.get<PrefecturesResponse>('/api/v1/prefectures');
+  const response = await client.get<PrefecturesResponse>('/api/v1/prefectures');
   const data = response.data;
   if (typeof data === 'number') throw new Error(data.toString());
   if (!data.result) throw new Error(data.statusCode);
@@ -22,7 +22,7 @@ const populationMemo = new Map<number, TotalPopulationData[]>();
 const getPopulation = async (prefCode: number) => {
   if (populationMemo.has(prefCode)) return populationMemo.get(prefCode)!;
   const params = {prefCode, cityCode: '-'};
-  const response = await axios.get<PopulationReponse>('/api/v1/population/composition/perYear', {params});
+  const response = await client.get<PopulationReponse>('/api/v1/population/composition/perYear', {params});
   const data = response.data;
   if (typeof data === 'number') throw new Error(data.toString());
   if (!data.result) throw new Error(data.statusCode);
