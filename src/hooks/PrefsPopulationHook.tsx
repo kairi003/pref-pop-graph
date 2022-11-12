@@ -29,8 +29,8 @@ export const usePrefsPopulationSeries = () => {
   }, []);
 
   const checkHandler = useCallback((index: number): void => {
-    setCheckedList(arrayUpdater(index, false));
-    setLoadingList(arrayUpdater(index, false));
+    setCheckedList(arrayUpdater(index, true));
+    setLoadingList(arrayUpdater(index, true));
 
     getPopulation(prefs[index].prefCode).then(popData => {
       setPops(arrayUpdater(index, popData));
