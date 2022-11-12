@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {PrefecturesResponse, PopulationReponse, TotalPopulationData} from 'utils/ResasModels'
+import {PrefecturesResponse, PrefectureData, PopulationReponse, TotalPopulationData} from 'utils/ResasModels'
 
 const baseURL = process.env.REACT_APP_RESAS_ENDPOINT || ''
 const apiKey = process.env.REACT_APP_RESAS_API_KEY || '';
@@ -9,25 +9,27 @@ const client = axios.create({
   headers: {'X-API-KEY': apiKey}
 });
 
-const getPrefectures = async () => {
+let prefecturesCache: PrefectureData[] | undefined;
+const getPrefectures = async (): Promise<PrefectureData[]> => {
+  if (prefecturesCache) return prefecturesCache;
   const response = await client.get<PrefecturesResponse>('/api/v1/prefectures');
   const data = response.data;
   if (typeof data === 'number') throw new Error(data.toString());
   if (!data.result) throw new Error(data.statusCode);
-  const prefsData = data.result;
+  const prefsData = prefecturesCache = data.result;
   return prefsData;
 }
 
-const populationMemo = new Map<number, TotalPopulationData[]>();
+const populationCache = new Map<number, TotalPopulationData[]>();
 const getPopulation = async (prefCode: number) => {
-  if (populationMemo.has(prefCode)) return populationMemo.get(prefCode)!;
+  if (populationCache.has(prefCode)) return populationCache.get(prefCode)!;
   const params = {prefCode, cityCode: '-'};
   const response = await client.get<PopulationReponse>('/api/v1/population/composition/perYear', {params});
   const data = response.data;
   if (typeof data === 'number') throw new Error(data.toString());
   if (!data.result) throw new Error(data.statusCode);
   const totalData = data.result.data[0].data;
-  populationMemo.set(prefCode, totalData);
+  populationCache.set(prefCode, totalData);
   return totalData;
 }
 
