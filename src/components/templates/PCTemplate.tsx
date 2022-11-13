@@ -4,8 +4,8 @@ import PrefCheckList from 'components/organisms/PrefCheckList';
 import PopulationChart from 'components/organisms/PopulationChart';
 import style from './PCTemplate.module.css'
 
-export const PCTemplate = () => {
-  const {series, prefProps} = usePrefsPopulationSeries();
+type Props = ReturnType<typeof usePrefsPopulationSeries>;
+export const PCTemplate: React.FC<Props> = ({series, prefProps}) => {
   return <div className={style.PcTemplate}>
   <header></header>
   <main className={style.main}>

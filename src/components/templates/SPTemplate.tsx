@@ -4,8 +4,8 @@ import PopulationChart from 'components/organisms/PopulationChart';
 import style from './SPTemplate.module.css'
 import PrefBlockList from 'components/organisms/PrefBlockList';
 
-export const SPTemplate = () => {
-  const {series, prefProps} = usePrefsPopulationSeries();
+type Props = ReturnType<typeof usePrefsPopulationSeries>;
+export const SPTemplate: React.FC<Props> = ({series, prefProps}) => {
   return <div className={style.SPTemplate}>
   <header></header>
   <main className={style.main}>
