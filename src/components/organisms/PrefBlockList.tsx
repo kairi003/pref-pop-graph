@@ -1,5 +1,6 @@
 import React, {useCallback} from 'react';
-import LabeledCheckbox from 'components/molecules/LabeledCheckbox';
+import ToggleBlock from 'components/molecules/ToggleBlock';
+import style from './PrefBlockList.module.css'
 
 type Props = {
   prefs: {prefCode: number, prefName: string}[],
@@ -8,7 +9,7 @@ type Props = {
   onChecked: (index: number) => void,
   onUnChecked: (index: number) => void
 }
-const PrefCheckList: React.FC<Props> = ({prefs, checkedList, loadingList, onChecked, onUnChecked}) => {
+const PrefBlockList: React.FC<Props> = ({prefs, checkedList, loadingList, onChecked, onUnChecked}) => {
 
 
   const checkHandler = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,7 +19,7 @@ const PrefCheckList: React.FC<Props> = ({prefs, checkedList, loadingList, onChec
 
 
   return <>
-  <div>
+  <div className={style.PrefBlockList}>
     {prefs.map(({prefCode, prefName}, index) => {
       const props = {
         id: `prefCheck${prefCode}`,
@@ -29,10 +30,10 @@ const PrefCheckList: React.FC<Props> = ({prefs, checkedList, loadingList, onChec
         key: index,
         labelText: prefName
       }
-      return <LabeledCheckbox {...props}/>;
+      return <ToggleBlock {...props}/>;
     })}
   </div>
 </>
 }
 
-export default PrefCheckList;
+export default PrefBlockList;

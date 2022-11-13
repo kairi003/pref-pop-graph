@@ -1,0 +1,19 @@
+.ToggleBlock, .ToggleBlock * {
+  cursor: pointer;
+}
+
+.Checkbox {
+  display: none;
+}
+
+.FormLabel {
+  display: inline-block;
+  user-select: none;
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.Checkbox:checked+.FormLabel {
+  background-color: rgb(255, 173, 161);
+}
