@@ -1,5 +1,6 @@
 import React, {useCallback} from 'react';
 import LabeledCheckbox from 'components/molecules/LabeledCheckbox';
+import style from './PrefCheckList.module.css';
 
 type Props = {
   prefs: {prefCode: number, prefName: string}[],
@@ -18,7 +19,7 @@ const PrefCheckList: React.FC<Props> = ({prefs, checkedList, loadingList, onChec
 
 
   return <>
-  <div>
+  <div className={style.PrefCheckList}>
     {prefs.map(({prefCode, prefName}, index) => {
       const props = {
         id: `prefCheck${prefCode}`,
