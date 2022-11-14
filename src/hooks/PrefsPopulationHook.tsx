@@ -2,6 +2,7 @@ import {useState, useEffect, useMemo, useCallback} from 'react';
 import {getPrefectures, getPopulation} from 'utils/ResasClient';
 import {PrefectureData, TotalPopulationData} from 'utils/ResasModels';
 import {arrayUpdater} from 'utils/HookUtils';
+import {SeriesLineOptions} from 'highcharts';
 
 /**
  * 人口グラフのSeriesと都道府県チェックを管理するカスタムフック
@@ -13,7 +14,7 @@ export const usePrefsPopulationSeries = () => {
   const [checkedList, setCheckedList] = useState<boolean[]>([]);
   const [loadingList, setLoadingList] = useState<boolean[]>([]);
 
-  const series: ({type: 'line', name: string, data: {x: number, y:number}[]}[]) = useMemo(() => pops
+  const series: (SeriesLineOptions[]) = useMemo(() => pops
     .map((popData, i) => ({popData, ...prefs[i]}))
     .filter((_,i) => checkedList[i])
     .map(({popData, prefName, prefCode}, i) => ({
