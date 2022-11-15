@@ -13,7 +13,7 @@ export type PrefectureCheckListProps = {
 }
 export type PrefecturePopulationReturnType = {
   prefPops: PrefecturePopulationData[],
-  prefProps: PrefectureCheckListProps
+  prefCheckProps: PrefectureCheckListProps
 }
 
 /**
@@ -73,7 +73,7 @@ export const usePrefecturePopulation = (): PrefecturePopulationReturnType => {
     setCheckedList(arrayUpdater(index, false));
   }, []);
 
-  return {prefPops, prefProps: {prefs, checkedList, loadingList, onChecked: checkHandler, onUnChecked: unCheckHander}};
+  return {prefPops, prefCheckProps: {prefs, checkedList, loadingList, onChecked: checkHandler, onUnChecked: unCheckHander}};
 }
 
 export default usePrefecturePopulation;
