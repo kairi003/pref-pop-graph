@@ -14,8 +14,8 @@ const LabeledCheckbox: React.FC<Props> = ({labelText, onChange, className, ...in
   }, [onChange]);
   const disabled = inputProps.disabled === true;
   return <div className={[style.LabeledCheckbox, disabled&&style.disabled, checked&&style.checked, className].join(' ')}>
-    <Checkbox {...inputProps} onChange={changeEventHandler} className={[style.pointable].join(' ')}/>
-    <FormLabel htmlFor={inputProps.id} className={[style.pointable].join(' ')}>
+    <Checkbox {...inputProps} onChange={changeEventHandler} className={style.pointable}/>
+    <FormLabel htmlFor={inputProps.id} className={style.pointable}>
       {labelText}
     </FormLabel>
   </div>
