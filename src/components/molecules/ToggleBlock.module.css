@@ -1,5 +1,9 @@
-.ToggleBlock, .ToggleBlock * {
+.pointable {
   cursor: pointer;
+}
+
+.disabled .pointable {
+  cursor: default;
 }
 
 .Checkbox {
@@ -14,6 +18,10 @@
   box-sizing: border-box;
 }
 
-.Checkbox:checked+.FormLabel {
-  background-color: rgb(255, 173, 161);
+.checked .FormLabel {
+  background-color: #faa;
+}
+
+.disabled .FormLabel {
+  background-color: #ddd;
 }

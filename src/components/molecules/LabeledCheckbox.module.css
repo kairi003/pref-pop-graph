@@ -1,3 +1,11 @@
-.LabeledCheckbo, .LabeledCheckbox * {
+.disabled {
+  color: #999;
+}
+
+.pointable {
   cursor: pointer;
+}
+
+.disabled .pointable {
+  cursor: default;
 }
