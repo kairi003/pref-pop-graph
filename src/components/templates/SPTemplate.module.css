@@ -1,5 +1,15 @@
-.SpTemplate {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+.SPTemplate {
+  background-color: aliceblue;
+  width: 100%;
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: max-content 1fr max-content;
+  grid-gap: 1rem;
+  box-sizing: border-box;
+  align-items: start;
+}
+
+.main {
+  display: grid;
+  grid-gap: 1rem;
 }

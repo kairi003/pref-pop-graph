@@ -7,12 +7,14 @@ import PrefBlockList from 'components/organisms/PrefBlockList';
 type Props = ReturnType<typeof usePrefsPopulationSeries>;
 export const SPTemplate: React.FC<Props> = ({series, prefProps}) => {
   return <div className={style.SPTemplate}>
-  <header></header>
+  <header>
+    <h1>都道府県人口推移グラフ</h1>
+  </header>
   <main className={style.main}>
     <PrefBlockList {...prefProps} />
-    <PopulationChart titleText="hogehoge" series={series} />
+    <PopulationChart series={series} />
   </main>
-  <footer></footer>
+  <footer>kairi</footer>
 </div>;
 }
 

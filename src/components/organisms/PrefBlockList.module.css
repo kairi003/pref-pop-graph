@@ -2,8 +2,5 @@
   font-size: 1rem;
   display: grid;
   grid-gap: 1px;
-  grid-template-columns: repeat(auto-fit, 5.5em);
-  justify-content: center;
-  align-content: space-evenly;
-  min-width: 400px;
+  grid-template-columns: repeat(auto-fit, minmax(5.5em, 1fr));
 }
