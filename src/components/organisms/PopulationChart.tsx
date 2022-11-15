@@ -2,14 +2,21 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { useRef, useEffect } from 'react';
 import style from './PopulationChart.module.css'
+import {PrefecturePopulationData} from 'hooks/PrefecturePopulationHook'
 
-type Props = {series: Highcharts.SeriesOptionsType[]};
-const PopulationChart: React.FC<Props> = ({series}) => {
+type Props = {prefPops: PrefecturePopulationData[]};
+const PopulationChart: React.FC<Props> = ({prefPops}) => {
   const options: Highcharts.Options = {
     title: {text: undefined},
-    series,
-    yAxis: {title: {text: '人口数'}},
-    xAxis: {title: {text: '年度'}, max: new Date().getFullYear()},
+    series: prefPops.map(({prefCode, prefName, popData}, index) => ({
+      type: 'line',
+      name: prefName,
+      data: popData.map(({year, value}) => ({x: year, y: value})),
+      id: prefCode.toString(),
+      index: index
+    })),
+    yAxis: {title: {text: '人口数', align: 'high'}},
+    xAxis: {title: {text: '年度', align: 'high'}, max: new Date().getFullYear()},
     tooltip: {valueSuffix: '人'},
     chart: {height: '500px'},
   };

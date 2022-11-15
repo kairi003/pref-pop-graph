@@ -2,26 +2,33 @@ import {useState, useEffect, useMemo, useCallback} from 'react';
 import {getPrefectures, getPopulation} from 'utils/ResasClient';
 import {PrefectureData, TotalPopulationData} from 'utils/ResasModels';
 import {arrayUpdater} from 'utils/HookUtils';
-import {SeriesLineOptions} from 'highcharts';
+
+export type PrefecturePopulationData = PrefectureData & {popData: TotalPopulationData[]};
+export type PrefectureCheckListProps = {
+  prefs: PrefectureData[],
+  checkedList: boolean[],
+  loadingList: boolean[],
+  onChecked: (index: number) => void,
+  onUnChecked: (index: number) => void
+}
+export type PrefecturePopulationReturnType = {
+  prefPops: PrefecturePopulationData[],
+  prefProps: PrefectureCheckListProps
+}
 
 /**
  * 人口グラフのSeriesと都道府県チェックを管理するカスタムフック
- * @returns {series, prefProps}
+ * @returns PrefecturePopulationReturnType
  */
-export const usePrefsPopulationSeries = () => {
+export const usePrefecturePopulation = (): PrefecturePopulationReturnType => {
   const [prefs, setPrefs] = useState<PrefectureData[]>([]);
   const [pops, setPops] = useState<TotalPopulationData[][]>([]);
   const [checkedList, setCheckedList] = useState<boolean[]>([]);
   const [loadingList, setLoadingList] = useState<boolean[]>([]);
 
-  const series: (SeriesLineOptions[]) = useMemo(() => pops
-    .map((popData, i) => ({popData, ...prefs[i]}))
-    .filter((_,i) => checkedList[i])
-    .map(({popData, prefName, prefCode}, i) => ({
-      type: 'line',
-      name: prefName,
-      data: popData.map(({year, value}) => ({x: year, y: value}))
-    })), [pops, checkedList, prefs]);
+  const prefPops: (PrefecturePopulationData[]) = useMemo(() =>
+    pops.map((popData, i) => ({popData, ...prefs[i]}))
+    .filter((_,i) => checkedList[i]), [pops, checkedList, prefs]);
 
   /**
    * マウント時に実行
@@ -66,5 +73,7 @@ export const usePrefsPopulationSeries = () => {
     setCheckedList(arrayUpdater(index, false));
   }, []);
 
-  return {series, prefProps: {prefs, checkedList, loadingList, onChecked: checkHandler, onUnChecked: unCheckHander}};
+  return {prefPops, prefProps: {prefs, checkedList, loadingList, onChecked: checkHandler, onUnChecked: unCheckHander}};
 }
+
+export default usePrefecturePopulation;

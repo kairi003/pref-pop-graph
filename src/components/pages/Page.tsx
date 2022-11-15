@@ -2,10 +2,10 @@ import React from 'react';
 import MediaQuery from "react-responsive";
 import SPTemplate from "components/templates/SPTemplate"
 import PCTemplate from "components/templates/PCTemplate"
-import { usePrefsPopulationSeries } from 'hooks/PrefsPopulationHook';
+import { usePrefecturePopulation} from 'hooks/PrefecturePopulationHook';
 
-const Page: React.FC = () => {
-  const props = usePrefsPopulationSeries();
+export const Page: React.FC = () => {
+  const props = usePrefecturePopulation();
   return <>
     <MediaQuery query="(max-width: 900px)">
       <SPTemplate {...props}/> 
