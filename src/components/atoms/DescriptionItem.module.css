@@ -1,0 +1,11 @@
+.title {
+  display: inline-block;
+  font-weight: bold;
+  font-style: normal;
+  justify-self: right;
+}
+.detail {
+  display: inline-block;
+  margin-inline-start: 0;
+  justify-self: left;
+}
