@@ -1,7 +1,6 @@
 .PrefCheckList {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 100px);
-  justify-content: center;
-  align-content: space-evenly;
-  min-width: 400px;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-content: start;
+  grid-gap: 0.3em;
 }
