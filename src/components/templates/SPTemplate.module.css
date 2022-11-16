@@ -13,3 +13,7 @@
   display: grid;
   row-gap: 1rem;
 }
+
+.Header, .Footer {
+  justify-items: center;
+}

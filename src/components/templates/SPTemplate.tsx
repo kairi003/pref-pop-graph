@@ -13,12 +13,12 @@ type Props = PrefecturePopulationReturnType & {
 
 export const SPTemplate: React.FC<Props> = ({prefPops, prefCheckProps, headerProps, footerProps}) => {
   return <div className={style.SPTemplate}>
-  <Header {...headerProps}/>
+  <Header {...headerProps} className={style.Header}/>
   <main className={style.main}>
     <PrefBlockList {...prefCheckProps} />
     <PopulationChart prefPops={prefPops} />
   </main>
-  <Footer {...footerProps}/>
+  <Footer {...footerProps} className={style.Footer}/>
 </div>;
 }
 
