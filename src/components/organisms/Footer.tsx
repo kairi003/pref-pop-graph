@@ -7,8 +7,8 @@ import DescriptionItem from 'components/atoms/DescriptionItem';
 import Contacts from 'components/atoms/Contacts';
 import style from './Footer.module.css'
 
-type Props = {publishYear: number, auther: string, repository: string, mail: string, className?: string, style?: React.CSSProperties};
-const Footer: React.FC<Props> = ({publishYear, auther, repository, mail, ...props}) => {
+export type FooterProps = {publishYear: number, auther: string, repository: string, mail: string, className?: string, style?: React.CSSProperties};
+const Footer: React.FC<FooterProps> = ({publishYear, auther, repository, mail, ...props}) => {
   const className = [props.className, style.Footer].join(' ');
   return <footer className={className}>
     <Contacts title="連絡先">

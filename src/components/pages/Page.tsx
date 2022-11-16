@@ -1,17 +1,29 @@
 import React from 'react';
 import MediaQuery from "react-responsive";
-import SPTemplate from "components/templates/SPTemplate"
-import PCTemplate from "components/templates/PCTemplate"
+import SPTemplate from "components/templates/SPTemplate";
+import PCTemplate from "components/templates/PCTemplate";
 import { usePrefecturePopulation} from 'hooks/PrefecturePopulationHook';
+import {HeaderProps} from "components/organisms/Header";
+import {FooterProps} from "components/organisms/Footer";
 
-export const Page: React.FC = () => {
+const Page: React.FC = () => {
   const props = usePrefecturePopulation();
+  const headerProps: HeaderProps = {
+    title: '都道府県人口推移グラフ',
+    description: '都道府県ごとの人口推移グラフです。'
+  }
+  const footerProps: FooterProps = {
+    publishYear: 2022,
+    auther: 'kairi',
+    repository: 'https://github.com/kairi003/pref-pop-graph',
+    mail: 'kairi.satellite@gmail.com'
+  }
   return <>
-    <MediaQuery query="(max-width: 900px)">
-      <SPTemplate {...props}/> 
+    <MediaQuery query="(max-width: 850px)">
+      <SPTemplate {...props} headerProps={headerProps} footerProps={footerProps}/> 
     </MediaQuery>
-    <MediaQuery query="not (max-width: 900px)">
-      <PCTemplate {...props}/> 
+    <MediaQuery query="not (max-width: 850px)">
+      <PCTemplate {...props} headerProps={headerProps} footerProps={footerProps}/> 
     </MediaQuery>
   </>;
 }

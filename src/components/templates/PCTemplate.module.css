@@ -6,6 +6,11 @@
   display: grid;
   grid-template-rows: max-content 1fr max-content;
   box-sizing: border-box;
+  row-gap: 1rem;
+}
+
+.PCTemplate>* {
+  padding: 0 1rem;
 }
 
 .main {
@@ -15,5 +20,4 @@
   width: 100%;
   margin: 0 auto;
   grid-template-rows: min-content;
-  padding: 0 1rem;
 }

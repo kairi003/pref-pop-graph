@@ -18,7 +18,7 @@ const PopulationChart: React.FC<Props> = ({prefPops}) => {
     yAxis: {title: {text: '人口数', align: 'high'}},
     xAxis: {title: {text: '年度', align: 'high'}, max: new Date().getFullYear()},
     tooltip: {valueSuffix: '人'},
-    chart: {height: '500px'},
+    chart: {height: '65%'},
   };
   const ref = useRef<HighchartsReact.RefObject>(null);
   // Highchartsはresizeイベントを検知して再描画を行う
