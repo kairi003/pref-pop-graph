@@ -1,5 +1,5 @@
-import React from 'react'
-import HeaderTitle from 'components/atoms/HeaderTitle'
+import React from 'react';
+import HeaderTitle from 'components/atoms/HeaderTitle';
 import HeaderDescription from 'components/atoms/HeaderDescription';
 
 export type HeaderProps = {title: string, description?: string, className?: string, style?: React.CSSProperties};

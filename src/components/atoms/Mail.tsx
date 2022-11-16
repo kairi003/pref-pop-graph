@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 type Props = {address: string, text?: string, className?: string, style?: React.CSSProperties};
 const Mail: React.FC<Props> = ({text, address, ...props}) => {

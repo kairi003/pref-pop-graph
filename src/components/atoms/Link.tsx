@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 type Props = {href: string, text?: string, className?: string, style?: React.CSSProperties};
 const Link: React.FC<Props> = ({text, ...props}) => {
