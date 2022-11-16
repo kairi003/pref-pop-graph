@@ -1,5 +1,5 @@
-import React from 'react'
-import style from './Contacts.module.css'
+import React from 'react';
+import style from './Contacts.module.css';
 
 type Props = React.ComponentPropsWithoutRef<'address'>;
 const Contacts: React.FC<Props> = (props) => {
