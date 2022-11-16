@@ -3,7 +3,7 @@
 }
 
 .disabled .pointable {
-  cursor: default;
+  cursor: wait;
 }
 
 .Checkbox {
