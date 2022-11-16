@@ -12,6 +12,7 @@
     "@types/react-dom": "^18.0.0",
     "@types/react-responsive": "^8.0.5",
     "axios": "^1.1.3",
+    "cross-env": "^7.0.3",
     "highcharts": "^10.3.1",
     "highcharts-react-official": "^3.1.0",
     "react": "^18.2.0",
@@ -23,7 +24,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "cross-env PUBLIC_URL=/pref-pop-graph react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
