@@ -22,8 +22,7 @@ const PrefCheckList: React.FC<Props> = ({prefs, checkedList, loadingList, onChec
 
 
   return <>
-  <div className={style.PrefCheckList}>
-    {(state === 'LOADING') && 'ロード中…'}
+  <div className={`${style.PrefCheckList} ${style[state]}`}>
     {(state === 'ERROR') && '【エラー】リロードしてください'}
     {(state === 'DONE') && prefs.map(({prefCode, prefName}, index) => {
       const props = {
