@@ -11,7 +11,7 @@ export type FooterProps = {publishYear: number, auther: string, repository: stri
 const Footer: React.FC<FooterProps> = ({publishYear, auther, repository, mail, ...props}) => {
   const className = [props.className, style.Footer].join(' ');
   return <footer className={className}>
-    <Contacts title="連絡先">
+    <Contacts>
       <DescriptionList>
         <DescriptionItem title="Repository">
           <Link href={repository}/>
