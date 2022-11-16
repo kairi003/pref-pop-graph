@@ -2,6 +2,7 @@ import {useState, useEffect, useMemo, useCallback} from 'react';
 import {getPrefectures, getPopulation} from 'utils/ResasClient';
 import {PrefectureData, TotalPopulationData} from 'utils/ResasModels';
 import {arrayUpdater} from 'utils/HookUtils';
+import {LoadingState} from 'utils/CommonModels';
 
 export type PrefecturePopulationData = PrefectureData & {popData: TotalPopulationData[]};
 export type PrefectureCheckListProps = {
@@ -9,7 +10,8 @@ export type PrefectureCheckListProps = {
   checkedList: boolean[],
   loadingList: boolean[],
   onChecked: (index: number) => void,
-  onUnChecked: (index: number) => void
+  onUnChecked: (index: number) => void,
+  state: LoadingState
 }
 export type PrefecturePopulationReturnType = {
   prefPops: PrefecturePopulationData[],
@@ -25,6 +27,7 @@ export const usePrefecturePopulation = (): PrefecturePopulationReturnType => {
   const [pops, setPops] = useState<TotalPopulationData[][]>([]);
   const [checkedList, setCheckedList] = useState<boolean[]>([]);
   const [loadingList, setLoadingList] = useState<boolean[]>([]);
+  const [prefsState, setPrefsState] = useState<LoadingState>('LOADING');
 
   const prefPops: (PrefecturePopulationData[]) = useMemo(() =>
     pops.map((popData, i) => ({popData, ...prefs[i]}))
@@ -40,7 +43,9 @@ export const usePrefecturePopulation = (): PrefecturePopulationReturnType => {
       setPops(Array(prefData.length).fill([]));
       setCheckedList(Array(prefData.length).fill(false));
       setLoadingList(Array(prefData.length).fill(false));
+      setPrefsState('DONE');
     }).catch(err => {
+      setPrefsState('ERROR');
       console.error('GET Prefs Error');
       console.error(err);
     });
@@ -73,7 +78,7 @@ export const usePrefecturePopulation = (): PrefecturePopulationReturnType => {
     setCheckedList(arrayUpdater(index, false));
   }, []);
 
-  return {prefPops, prefCheckProps: {prefs, checkedList, loadingList, onChecked: checkHandler, onUnChecked: unCheckHander}};
+  return {prefPops, prefCheckProps: {prefs, checkedList, loadingList, onChecked: checkHandler, onUnChecked: unCheckHander, state: prefsState}};
 }
 
 export default usePrefecturePopulation;
