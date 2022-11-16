@@ -24,3 +24,5 @@ yarn-error.log*
 
 # Kasperskyが生成するログファイル
 AMSI_*.log
+# buildテスト用のシンボリックリンク
+pref-pop-graph
