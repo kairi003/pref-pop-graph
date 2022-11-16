@@ -1,15 +1,18 @@
 import React, {useCallback} from 'react';
 import LabeledCheckbox from 'components/molecules/LabeledCheckbox';
 import style from './PrefCheckList.module.css';
+import {LoadingState} from 'utils/CommonModels';
+
 
 type Props = {
   prefs: {prefCode: number, prefName: string}[],
   checkedList: boolean[],
   loadingList: boolean[], 
   onChecked: (index: number) => void,
-  onUnChecked: (index: number) => void
+  onUnChecked: (index: number) => void,
+  state: LoadingState
 }
-const PrefCheckList: React.FC<Props> = ({prefs, checkedList, loadingList, onChecked, onUnChecked}) => {
+const PrefCheckList: React.FC<Props> = ({prefs, checkedList, loadingList, onChecked, onUnChecked, state}) => {
 
 
   const checkHandler = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,7 +23,9 @@ const PrefCheckList: React.FC<Props> = ({prefs, checkedList, loadingList, onChec
 
   return <>
   <div className={style.PrefCheckList}>
-    {prefs.map(({prefCode, prefName}, index) => {
+    {(state === 'LOADING') && 'ロード中…'}
+    {(state === 'ERROR') && '【エラー】リロードしてください'}
+    {(state === 'DONE') && prefs.map(({prefCode, prefName}, index) => {
       const props = {
         id: `prefCheck${prefCode}`,
         onChange: checkHandler,
