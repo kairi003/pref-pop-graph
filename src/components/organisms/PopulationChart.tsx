@@ -1,8 +1,8 @@
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { useRef, useEffect } from 'react';
-import style from './PopulationChart.module.css'
-import {PrefecturePopulationData} from 'hooks/PrefecturePopulationHook'
+import style from './PopulationChart.module.css';
+import {PrefecturePopulationData} from 'hooks/PrefecturePopulationHook';
 
 type Props = {prefPops: PrefecturePopulationData[]};
 const PopulationChart: React.FC<Props> = ({prefPops}) => {

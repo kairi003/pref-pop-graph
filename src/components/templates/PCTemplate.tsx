@@ -2,7 +2,7 @@ import React from 'react';
 import {PrefecturePopulationReturnType} from 'hooks/PrefecturePopulationHook';
 import PopulationChart from 'components/organisms/PopulationChart';
 import PrefCheckList from 'components/organisms/PrefCheckList';
-import style from './PCTemplate.module.css'
+import style from './PCTemplate.module.css';
 import Header, {HeaderProps} from 'components/organisms/Header';
 import Footer, {FooterProps} from 'components/organisms/Footer';
 

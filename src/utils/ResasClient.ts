@@ -1,5 +1,5 @@
-import axios from 'axios'
-import {PrefecturesResponse, PrefectureData, PopulationReponse, TotalPopulationData} from 'utils/ResasModels'
+import axios from 'axios';
+import {PrefecturesResponse, PrefectureData, PopulationReponse, TotalPopulationData} from 'utils/ResasModels';
 
 const baseURL = process.env.REACT_APP_RESAS_ENDPOINT || ''
 const apiKey = process.env.REACT_APP_RESAS_API_KEY || '';

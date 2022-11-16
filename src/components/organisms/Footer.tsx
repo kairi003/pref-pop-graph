@@ -5,7 +5,7 @@ import Link from 'components/atoms/Link';
 import DescriptionList from 'components/atoms/DescriptionList';
 import DescriptionItem from 'components/atoms/DescriptionItem';
 import Contacts from 'components/atoms/Contacts';
-import style from './Footer.module.css'
+import style from './Footer.module.css';
 
 export type FooterProps = {publishYear: number, auther: string, repository: string, mail: string, className?: string, style?: React.CSSProperties};
 const Footer: React.FC<FooterProps> = ({publishYear, auther, repository, mail, ...props}) => {

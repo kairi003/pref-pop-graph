@@ -7,5 +7,5 @@
 }
 
 .disabled .pointable {
-  cursor: default;
+  cursor: wait;
 }

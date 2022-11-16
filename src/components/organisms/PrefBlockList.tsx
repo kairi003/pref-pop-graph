@@ -1,15 +1,17 @@
 import React, {useCallback} from 'react';
 import ToggleBlock from 'components/molecules/ToggleBlock';
-import style from './PrefBlockList.module.css'
+import style from './PrefBlockList.module.css';
+import {LoadingState} from 'utils/CommonModels';
 
 type Props = {
   prefs: {prefCode: number, prefName: string}[],
   checkedList: boolean[],
   loadingList: boolean[], 
   onChecked: (index: number) => void,
-  onUnChecked: (index: number) => void
+  onUnChecked: (index: number) => void,
+  state: LoadingState
 }
-const PrefBlockList: React.FC<Props> = ({prefs, checkedList, loadingList, onChecked, onUnChecked}) => {
+const PrefBlockList: React.FC<Props> = ({prefs, checkedList, loadingList, onChecked, onUnChecked, state}) => {
 
 
   const checkHandler = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,8 +21,9 @@ const PrefBlockList: React.FC<Props> = ({prefs, checkedList, loadingList, onChec
 
 
   return <>
-  <div className={style.PrefBlockList}>
-    {prefs.map(({prefCode, prefName}, index) => {
+  <div className={`${style.PrefBlockList} ${style[state]}`}>
+    {(state === 'ERROR') && '【エラー】リロードしてください'}
+    {(state === 'DONE') && prefs.map(({prefCode, prefName}, index) => {
       const props = {
         id: `prefCheck${prefCode}`,
         onChange: checkHandler,
