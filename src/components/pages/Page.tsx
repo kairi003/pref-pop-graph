@@ -9,8 +9,8 @@ import {FooterProps} from "components/organisms/Footer";
 const Page: React.FC = () => {
   const props = usePrefecturePopulation();
   const headerProps: HeaderProps = {
-    title: '都道府県人口推移グラフ',
-    description: '都道府県ごとの人口推移グラフです。'
+    title: 'PrefPopGraph',
+    description: '都道府県ごとの人口推移グラフ'
   }
   const footerProps: FooterProps = {
     publishYear: 2022,
