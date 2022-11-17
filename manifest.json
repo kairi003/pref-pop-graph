@@ -1,6 +1,6 @@
 {
-  "short_name": "pp-graph",
-  "name": "pref-pop-graph",
+  "short_name": "PPGraph",
+  "name": "PrefPopGraph",
   "icons": [
     {
       "src": "favicon.ico",
