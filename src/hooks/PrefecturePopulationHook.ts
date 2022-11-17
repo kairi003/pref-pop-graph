@@ -1,4 +1,4 @@
-import {useState, useEffect, useMemo, useCallback} from 'react';
+import {useState, useEffect, useMemo, useCallback, useRef} from 'react';
 import {getPrefectures, getPopulation} from 'utils/ResasClient';
 import {PrefectureData, TotalPopulationData} from 'utils/ResasModels';
 import {arrayUpdater} from 'utils/HookUtils';
@@ -24,14 +24,14 @@ export type PrefecturePopulationReturnType = {
  */
 export const usePrefecturePopulation = (): PrefecturePopulationReturnType => {
   const [prefs, setPrefs] = useState<PrefectureData[]>([]);
-  const [pops, setPops] = useState<TotalPopulationData[][]>([]);
+  const pops = useRef<TotalPopulationData[][]>([]);
   const [checkedList, setCheckedList] = useState<boolean[]>([]);
   const [loadingList, setLoadingList] = useState<boolean[]>([]);
   const [prefsState, setPrefsState] = useState<LoadingState>('LOADING');
 
   const prefPops: (PrefecturePopulationData[]) = useMemo(() =>
-    pops.map((popData, i) => ({popData, ...prefs[i]}))
-    .filter((_,i) => checkedList[i]), [pops, checkedList, prefs]);
+    pops.current.map((popData, i) => ({popData, ...prefs[i]}))
+    .filter((_,i) => checkedList[i] && !loadingList[i]), [prefs, checkedList, loadingList]);
 
   /**
    * マウント時に実行
@@ -40,7 +40,7 @@ export const usePrefecturePopulation = (): PrefecturePopulationReturnType => {
   useEffect(() => {
     getPrefectures().then(prefData => {
       setPrefs(prefData);
-      setPops(Array(prefData.length).fill([]));
+      pops.current = Array(prefData.length).fill([]);
       setCheckedList(Array(prefData.length).fill(false));
       setLoadingList(Array(prefData.length).fill(false));
       setPrefsState('DONE');
@@ -57,10 +57,11 @@ export const usePrefecturePopulation = (): PrefecturePopulationReturnType => {
    */
   const checkHandler = useCallback((index: number): void => {
     setCheckedList(arrayUpdater(index, true));
+    if (pops.current[index].length > 0) return;
     setLoadingList(arrayUpdater(index, true));
 
     getPopulation(prefs[index].prefCode).then(popData => {
-      setPops(arrayUpdater(index, popData));
+      pops.current[index] = popData;
     }).catch(err => {
       setCheckedList(arrayUpdater(index, false));
       console.error('GET Pop Error');
