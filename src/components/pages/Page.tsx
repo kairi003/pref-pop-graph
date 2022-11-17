@@ -18,11 +18,12 @@ const Page: React.FC = () => {
     repository: 'https://github.com/kairi003/pref-pop-graph',
     mail: 'kairi.satellite@gmail.com'
   }
+  const thr = process.env.REACT_APP_DEVICE_WIDTH_THRESHOLD || '0px';
   return <>
-    <MediaQuery query="(max-width: 850px)">
+    <MediaQuery query={`(max-width: ${thr})`}>
       <SPTemplate {...props} headerProps={headerProps} footerProps={footerProps}/> 
     </MediaQuery>
-    <MediaQuery query="not (max-width: 850px)">
+    <MediaQuery query={`not (max-width: ${thr})`}>
       <PCTemplate {...props} headerProps={headerProps} footerProps={footerProps}/> 
     </MediaQuery>
   </>;
