@@ -4,25 +4,24 @@ import ResizeHandle from 'components/atoms/ResizeHandle';
 import {useResizableBlock} from 'hooks/ResizableBlockHook';
 import { MoveDirection } from 'utils/CommonModels';
 
-type Props = {
-  className?: string, style?: React.CSSProperties,
-  direction: MoveDirection
+type Props = React.ComponentPropsWithRef<'div'> & {
+  direction: MoveDirection,
+  contentRef: React.RefObject<any>;
 };
-const ResizableBlock: React.FC<React.PropsWithChildren<Props>> = ({direction, children, className, ...props}) => {
-  
+const ResizableBlock: React.FC<Props> = ({direction, children, className, contentRef,...props}) => {
   const {containerRef, width, height, bothHandler, verticalHandler, horizontalHandler} = useResizableBlock();
-  
+
   return <div
     {...props}
     className={`${style.ResizableBlock} ${style[direction]} ${className}`}
     ref={containerRef}
-    style={{width, height}}
+    style={{width, height, aspectRatio: (width || height) && 'unset'}}
   >
-    <div className={`${style.content}`} draggable>
+    <div className={`${style.content}`} ref={contentRef}>
       {children}
     </div>
-    {(direction !== "vertical") && <ResizeHandle direction='horizontal' onMouseDown={horizontalHandler} onTouchStart={horizontalHandler}/>}
-    {(direction !== "horizontal") && <ResizeHandle direction='vertical' onMouseDown={verticalHandler} onTouchStart={verticalHandler}/>}
+    {(direction === 'both' || direction === 'horizontal') && <ResizeHandle direction='horizontal' onMouseDown={horizontalHandler} onTouchStart={horizontalHandler}/>}
+    {(direction === 'both' || direction === 'vertical') && <ResizeHandle direction='vertical' onMouseDown={verticalHandler} onTouchStart={verticalHandler}/>}
     {(direction === "both") && <ResizeHandle direction='both' onMouseDown={bothHandler} onTouchStart={bothHandler}/>}
   </div>
 } 

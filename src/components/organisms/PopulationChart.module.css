@@ -1,4 +1,9 @@
 .PopulationChart {
   overflow: hidden;
-  resize: vertical;
+}
+.PopulationChart>.Resizableblock {
+  width: 100%;
+  aspect-ratio: 20/13;
+  min-height: 200px;
+  overflow-x: hidden;
 }
