@@ -10,7 +10,7 @@ const Page: React.FC = () => {
   const props = usePrefecturePopulation();
   const headerProps: HeaderProps = {
     title: 'PrefPopGraph',
-    description: '都道府県ごとの人口推移グラフ'
+    description: '都道府県ごとの人口推移グラフです。グラフ下部をドラッグして高さを調節できます。'
   }
   const footerProps: FooterProps = {
     publishYear: 2022,
