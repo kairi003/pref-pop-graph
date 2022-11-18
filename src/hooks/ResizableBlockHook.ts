@@ -5,13 +5,16 @@ export const useResizableBlock = () => {
   const [moveState, setMoveState] = useState<MoveDirection | null>(null);
   const [width, setWidth] = useState<number | undefined>(undefined);
   const [height, setHeight] = useState<number | undefined>(undefined);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const blockRef = useRef<HTMLDivElement>(null);
 
+  // ハンドルをドラッグ開始
   useEffect(() => {
-    if (moveState === null || containerRef.current === null) return;
+    if (moveState === null || blockRef.current === null) return;
     const state = moveState;
-    const container = containerRef.current;
-
+    const container = blockRef.current;
+    
+    // Mouse|Touch Moveイベントのハンドラ
+    // preventDefault でスワイプでのスクロールを防ぐ
     const moveHandler = (ev: MouseEvent | TouchEvent) => {
       ev.preventDefault();
       const {left, top} = container.getBoundingClientRect();
@@ -24,16 +27,19 @@ export const useResizableBlock = () => {
     document.addEventListener('mousemove', moveHandler, {passive: false});
     document.addEventListener('touchmove', moveHandler, {passive: false});
 
-    const upHandler = (ev: MouseEvent | TouchEvent) => {setMoveState(null);}
+    // Mouse|Touch Upイベントのハンドラ
+    const upHandler = () => {setMoveState(null);}
     document.addEventListener('mouseup', upHandler);
     document.addEventListener('touchend', upHandler);
 
+    // ハンドルドラッグ中はカーソルを変える
     document.body.style.cursor = ({
       both: 'nwse-resize',
       horizontal: 'ew-resize',
       vertical: 'ns-resize'
     })[state];
     
+    // CleanupでEventListnerを外す & カーソルを戻す
     return () => {
       document.removeEventListener('mousemove', moveHandler);
       document.removeEventListener('touchmove', moveHandler);
@@ -43,12 +49,14 @@ export const useResizableBlock = () => {
     }
   }, [moveState]);
 
+  // 3種のハンドルに適用するドラッグ開始ハンドラ
   const [bothHandler, verticalHandler, horizontalHandler] = useMemo(() => {
     const dirs = ['both', 'vertical', 'horizontal'] as const ;
     return dirs.map(d => (() => setMoveState(d)));
   }, []);
 
+  // touchstartイベントが発火するために必要な何もしないClickハンドラ
   const clickHandler = useCallback(()=>{}, []);
 
-  return {containerRef, width, height, bothHandler, verticalHandler, horizontalHandler, clickHandler};
+  return {blockRef, width, height, bothHandler, verticalHandler, horizontalHandler, clickHandler};
 }

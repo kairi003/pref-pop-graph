@@ -1,4 +1,24 @@
-# Getting Started with Create React App
+# PrefPopGraph
+都道府県の人口推移グラフを表示するSPA
+
+## Documentation
+- https://github.com/kairi003/pref-pop-graph/wiki
+
+## Publish URL
+- https://kairi003.github.io/pref-pop-graph/
+- Github ActionsでGithub Pagesに自動デプロイしています
+
+## API in use
+- [RESAS API](https://opendata.resas-portal.go.jp/) 地域経済分析システム
+
+## Additional Packages in use
+- [Highcharts](https://www.highcharts.com/)
+- [axios](https://github.com/axios/axios)
+- [cross-env](https://github.com/kentcdodds/cross-env#readme)
+
+
+---
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
