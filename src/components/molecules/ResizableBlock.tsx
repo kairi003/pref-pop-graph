@@ -8,13 +8,13 @@ type Props = React.ComponentPropsWithRef<'div'> & {
   direction: MoveDirection,
   contentRef: React.RefObject<any>;
 };
-const ResizableBlock: React.FC<Props> = ({direction, children, className, contentRef,...props}) => {
-  const {containerRef, width, height, bothHandler, verticalHandler, horizontalHandler, clickHandler} = useResizableBlock();
+const ResizableBlock: React.FC<Props> = ({direction, children, className, contentRef, ...props}) => {
+  const {blockRef, width, height, bothHandler, verticalHandler, horizontalHandler, clickHandler} = useResizableBlock();
 
   return <div
     {...props}
     className={`${style.ResizableBlock} ${style[direction]} ${className}`}
-    ref={containerRef}
+    ref={blockRef}
     style={{width, height, aspectRatio: (width || height) && 'unset'}}
   >
     <div className={`${style.content}`} ref={contentRef}>
