@@ -1,0 +1,15 @@
+.ResizeHandle {
+  border: double 0.5em #bbb;
+}
+
+.ResizeHandle.both {
+  cursor: nwse-resize;
+}
+
+.ResizeHandle.vertical {
+  cursor: ns-resize;
+}
+
+.ResizeHandle.horizontal {
+  cursor: ew-resize;
+}

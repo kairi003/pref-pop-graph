@@ -20,4 +20,5 @@
   width: 100%;
   margin: 0 auto;
   grid-template-rows: min-content;
+  align-items: start;
 }
