@@ -18,8 +18,8 @@ export const useResizableBlock = () => {
       const {clientX, clientY} = ('clientX' in ev) ? ev : ev.changedTouches[0];
       const width = Math.max(0, clientX - left);
       const height = Math.max(0, clientY - top);
-      if (state !== 'vertical') setWidth(width);
-      if (state !== 'horizontal') setHeight(height);
+      if (state === 'both' || state === 'horizontal') setWidth(width);
+      if (state === 'both' || state === 'vertical') setHeight(height);
     }
     document.addEventListener('mousemove', moveHandler, {passive: false});
     document.addEventListener('touchmove', moveHandler, {passive: false});
