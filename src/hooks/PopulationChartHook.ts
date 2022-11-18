@@ -16,17 +16,25 @@ export const usePopulationChart = (prefPops: PrefecturePopulationData[]) => {
     yAxis: {title: {text: '人口数', align: 'high'}},
     xAxis: {title: {text: '年度',   align: 'high'}, max: new Date().getFullYear()},
     tooltip: {valueSuffix: '人'},
-    chart: {height: '65%', reflow: false},
+    chart: {reflow: false}
   };
   
   const chartRef = useRef<HighchartsReact.RefObject>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    const observer = new ResizeObserver(() => {chartRef.current?.chart.reflow()});
-    const container = chartRef.current?.container.current;
+    const observer = new ResizeObserver(entries => {
+      for (let entry of entries) {
+        if (entry.contentBoxSize.length < 1) continue;
+        const {inlineSize, blockSize} = entry.contentBoxSize[0];
+        chartRef.current?.chart.setSize(inlineSize, blockSize, false);
+        break;
+      }
+    });
+    const container = containerRef.current;
     if (container) observer.observe(container);
     chartRef.current?.chart.reflow();
     return () => {observer.disconnect()};
   }, []);
 
-  return {options, chartRef};
+  return {options, chartRef, containerRef};
 }

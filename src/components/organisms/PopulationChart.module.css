@@ -1,3 +1,4 @@
 .PopulationChart {
   overflow: hidden;
+  resize: vertical;
 }
