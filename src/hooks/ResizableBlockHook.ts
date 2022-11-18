@@ -1,4 +1,4 @@
-import {useState, useEffect, useRef, useMemo} from 'react';
+import {useState, useEffect, useRef, useMemo, useCallback} from 'react';
 import { MoveDirection } from 'utils/CommonModels';
 
 export const useResizableBlock = () => {
@@ -48,5 +48,7 @@ export const useResizableBlock = () => {
     return dirs.map(d => (() => setMoveState(d)));
   }, []);
 
-  return {containerRef, width, height, bothHandler, verticalHandler, horizontalHandler};
+  const clickHandler = useCallback(()=>{}, []);
+
+  return {containerRef, width, height, bothHandler, verticalHandler, horizontalHandler, clickHandler};
 }

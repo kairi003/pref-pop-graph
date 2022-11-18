@@ -9,7 +9,7 @@ type Props = React.ComponentPropsWithRef<'div'> & {
   contentRef: React.RefObject<any>;
 };
 const ResizableBlock: React.FC<Props> = ({direction, children, className, contentRef,...props}) => {
-  const {containerRef, width, height, bothHandler, verticalHandler, horizontalHandler} = useResizableBlock();
+  const {containerRef, width, height, bothHandler, verticalHandler, horizontalHandler, clickHandler} = useResizableBlock();
 
   return <div
     {...props}
@@ -20,9 +20,15 @@ const ResizableBlock: React.FC<Props> = ({direction, children, className, conten
     <div className={`${style.content}`} ref={contentRef}>
       {children}
     </div>
-    {(direction === 'both' || direction === 'horizontal') && <ResizeHandle direction='horizontal' onMouseDown={horizontalHandler} onTouchStart={horizontalHandler}/>}
-    {(direction === 'both' || direction === 'vertical') && <ResizeHandle direction='vertical' onMouseDown={verticalHandler} onTouchStart={verticalHandler}/>}
-    {(direction === "both") && <ResizeHandle direction='both' onMouseDown={bothHandler} onTouchStart={bothHandler}/>}
+    {(direction === 'both' || direction === 'horizontal') && 
+      <ResizeHandle direction='horizontal'
+        onMouseDown={horizontalHandler} onTouchStart={horizontalHandler} onClick={clickHandler}/>}
+    {(direction === 'both' || direction === 'vertical') && 
+      <ResizeHandle direction='vertical'
+        onMouseDown={verticalHandler} onTouchStart={verticalHandler} onClick={clickHandler}/>}
+    {(direction === "both") && 
+      <ResizeHandle direction='both'
+        onMouseDown={bothHandler} onTouchStart={bothHandler} onClick={clickHandler}/>}
   </div>
 } 
 
