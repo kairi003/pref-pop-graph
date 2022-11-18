@@ -1,0 +1,14 @@
+.ResizableBlock {
+  display: grid;
+  width: 300px;
+  height: 300px;
+  min-width: 2em;  
+  min-height: 2em;
+}
+
+.ResizableBlock.horizontal, .ResizableBlock.both {
+  grid-template-columns: 1fr 1em;
+}
+.ResizableBlock.vertical, .ResizableBlock.both {
+  grid-template-rows: 1fr 1em;
+}
